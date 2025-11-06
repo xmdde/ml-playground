@@ -12,9 +12,10 @@ from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 
 df = sns.load_dataset("penguins")
 df = df.dropna()
+print(df.size)
 
-# sns.pairplot(df, hue = "species")
-# plt.show()
+sns.pairplot(df, hue = "species")
+plt.show()
 
 X = pd.get_dummies(df.drop("species", axis=1))
 encoder = LabelEncoder()
@@ -71,6 +72,7 @@ for epoch in range(epochs):
         print(f"Epoch {epoch}, loss={loss.item():.4f}")
 
 
+model.eval()
 
 with torch.no_grad():
     test_preds = model(X_test).argmax(axis = 1)
